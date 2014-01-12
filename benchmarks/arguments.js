@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var a = [], n = 1000000, testCases = [];
+  var a = [], n = 1000000, testCases = [0, 1, 2];
 
   function proto () {
     var args = Array.prototype.slice.call(arguments, 1);
@@ -11,7 +11,7 @@
   function forLoop () {
     var args = [];
     for (var i = 1, l = arguments.length; i < l; i++)
-      args.push(arguments[i]);
+      args[i-1] = arguments[i];
     args.push(1);
     return args;
   }

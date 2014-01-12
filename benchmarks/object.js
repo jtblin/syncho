@@ -56,7 +56,7 @@
       console.timeEnd('sync');
 
       results = [];
-      require('fibrous')
+      require('fibrous');
       console.time('fibrous');
       for (var i = 0; i < n; i++) {
         results.push(fs.sync.stat('./package.json'));

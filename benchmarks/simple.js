@@ -10,7 +10,7 @@
   function asyncFn (i, cb) {
     setTimeout(function () {
       cb(null, 'foo' + i);
-    }, t)
+    }, t);
   }
 
   function runAsync (i) {
@@ -44,8 +44,7 @@
 
       console.time('sync-fast-future');
       for (i = 0; i < n; i++) {
-        var future = asyncFn.future(null, i);
-        future.wait();
+        asyncFn.future(null, i).wait();
       }
       console.timeEnd('sync-fast-future');
 
