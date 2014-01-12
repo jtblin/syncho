@@ -12,57 +12,26 @@
     return this.future.apply(this, arguments).wait();
   };
 
-  function produce () {
-    var res = Fiber.yield();
-    if (res instanceof Error) throw res;
-    else return res;
-  }
-
-  Function.prototype.async = function async (cxt) {
-    var fn = this;
-    return function (/* arguments */) {
-      var cb = arguments[arguments.length-1];
-      delete arguments[--arguments.length];
-      if (typeof cb !== 'function') throw new Error('Must pass a callback function to async functions');
-      try {
-        cb(null, fn.apply(cxt, arguments));
-      }
-      catch (err) {
-        cb(err);
-      }
-    }
-  };
-
   Function.prototype.future = function future (thisArg, args) {
-    var fn = this, fiber = Fiber.current, resolved = false, yielded = false, future = {};
-    // TODO: future object
-    if (arguments.length) {
-      for (var i = 1, l = arguments.length; i < l; i++)
-        arguments[i-1] = arguments[i];
-      arguments[arguments.length-1] = resolve;
-    } else {
-      arguments[arguments.length++] = resolve;
-    }
-    fn.apply(thisArg, arguments);
+    var fn = this, fiber = Fiber.current, resolved = false, yielded = false, future = {}, args = [];
+    for (var i = 1, l = arguments.length; i < l; i++)
+      args[i-1] = arguments[i];
+    args.push(resolve);
+    fn.apply(thisArg, args);
 
     future.wait = function () {
       if (! resolved) {
-        yielded = true;
-        // TODO: simplify
         try {
           future.result =  produce();
-          return future.result;
         }
         catch (err) {
           future.error = err;
-          throw err;
         }
-      } else {
-        if (future.error)
-          throw future.error;
-        else
-          return future.result;
       }
+      if (future.error)
+        throw future.error;
+      else
+        return future.result;
     };
 
     function resolve (err, res) {
@@ -82,7 +51,29 @@
         future.result = res;
       }
     }
+
+    function produce () {
+      yielded = true;
+      var res = Fiber.yield();
+      if (res instanceof Error) throw res;
+      else return res;
+    }
     return future;
+  };
+
+  Function.prototype.async = function async (cxt) {
+    var fn = this;
+    return function (/* arguments */) {
+      var cb = arguments[arguments.length-1];
+      delete arguments[--arguments.length];
+      if (typeof cb !== 'function') throw new Error('Must pass a callback function to async functions');
+      try {
+        cb(null, fn.apply(cxt, arguments));
+      }
+      catch (err) {
+        cb(err);
+      }
+    }
   };
 
   function sleep (ms) {
@@ -102,4 +93,5 @@
   Sync.middleware = middleware;
 
   module.exports = Sync;
+
 })();
