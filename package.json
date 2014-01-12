@@ -1,0 +1,33 @@
+{
+  "author": "Jerome Touffe-Blin <jtblin@gmail.com> (http://about.me/jtblin)",
+  "name": "sync-fast",
+  "description": "",
+  "version": "0.0.1",
+  "dependencies": {
+    "fibers": "~1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jtblin/sync-fast.git"
+  },
+  "main": "sync.js",
+  "engines": {
+    "node": ">=0.5.2"
+  },
+  "keywords": [
+    "fibers",
+    "sync",
+    "harmony",
+    "flow",
+    "thread",
+    "control"
+  ],
+  "license": "BSD",
+  "devDependencies": {
+    "mocha": "~1.17.0",
+    "chai": "~1.8.1"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha -w test/"
+  }
+}
