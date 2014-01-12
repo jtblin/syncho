@@ -1,9 +1,10 @@
 (function () {
   "use strict";
-  var Sync = require('../sync'), fs = require('fs'), Fiber = require('fibers')
-    , Future = require('fibers/future'), wait = Future.wait, async = require('async')
+  var Sync = require('../sync')
+    , async = require('async')
     , sync = require('synchronize')
-    , t = 0, n = 10000
+    , t = 0, n = 10000, count = 0
+    , asyncSeries = []
     ;
 
   var fs = {
@@ -26,9 +27,6 @@
   function testSync () {
 
     Sync(function() {
-      var count = 0;
-      var futureAsync = Future.wrap(fs.stat.bind(fs))
-        , asyncSeries = [];
 
       for (var i = 0; i < n; i++) {
         asyncSeries.push(asyncFn);
@@ -65,6 +63,7 @@
       }
       console.timeEnd('fibrous');
 
+      var Fiber = require('fibers');
       results = [];
       console.time('fibers');
       var fiber = Fiber.current;
@@ -76,6 +75,7 @@
       }
       console.timeEnd('fibers');
 
+      var Future = require('fibers/future'), futureAsync = Future.wrap(fs.stat.bind(fs), 1);
       results = [];
       console.time('future');
       for (var i = 0; i < n; i++) {

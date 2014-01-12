@@ -9,36 +9,8 @@
   Sync.Fiber = Fiber;
 
   Function.prototype.sync = function sync (thisArg, args) {
-    // TODO: remove code duplication between sync and future
-    if (arguments.length) {
-      for (var i = 1, l = arguments.length; i < l; i++)
-        arguments[i-1] = arguments[i];
-    } else {
-      arguments[arguments.length++] = null;
-    }
-    return harmonize(this, thisArg, arguments);
+    return this.future.apply(this, arguments).wait();
   };
-
-  function harmonize (fn, obj, args) {
-    var fiber = Fiber.current, resolved = false;
-    if (! fiber) throw new Error('Must run in a fiber');
-    args[args.length-1] = resolve;
-    fn.apply(obj, args);
-    return produce();
-
-    function resolve (err, res) {
-      if (resolved) return;
-      resolved = true;
-      process.nextTick(function () {
-        if (err) {
-          if (! (err instanceof Error)) err = new Error(err);
-          fiber.run(err);
-        } else {
-          fiber.run(res);
-        }
-      });
-    }
-  }
 
   function produce () {
     var res = Fiber.yield();
