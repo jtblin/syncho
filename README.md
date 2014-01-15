@@ -1,13 +1,13 @@
 # syncho
 
-syncho is a thin and fast wrapper around [fibers](https://github.com/laverdet/node-fibers) for node.js.
+`syncho` is a thin and fast wrapper around [fibers](https://github.com/laverdet/node-fibers) for node.js.
 The API is very similar to [node-sync](http://github.com/0ctave/node-sync)
 but optimized to reduce overhead (see benchmarks) and in less than 100 lines of code.
 
 
 ## Usage
 
-   npm install syncho
+    npm install syncho
 
 ## API
 
@@ -33,7 +33,7 @@ Sync(function (){
 ### Function.prototype.sync(thisArg, args)
 
   Execute an asynchronous function inside a fiber, and return the result or throw in case of error.
-  It uses the idiomatic `Function.prototype.call` where the first argument is the object you want
+  Use the idiomatic `Function.prototype.call` where the first argument is the object you want
   to bind the function to, the others are the standard arguments of the function.
 
 ```js
@@ -196,14 +196,14 @@ app.listen(3000, function () {
 });
 ```
 
-## Why `synchronous` and comparison with other fibers abstraction modules
+## Why `syncho` and comparison with other fibers abstraction modules
 
   Fibers are awesome. I am not going to discussed their value here as it has been thoroughly documented but going to focus
   on why a new module was needed when there is already a ton of existing abstractions.
 
   I really loved the simplicity of the `sync` module from @0ctave compared to the original `Future` abstraction
   and other `Fiber` modules but there are some performance issues especially with `Function.prototype.future` in
-  the `sync` module and code like statistics that I think unnecessary (500 loc for `sync` vs 100 loc for 'synchronous').
+  the `sync` module and code like statistics that I think unnecessary (500 loc for `sync` vs 100 loc for 'syncho').
   As this isn't a fork of the `sync` module at all (code is written entirely from scratch) and is not 100% compatible
   with its API [1], it was better to create a brand new module.
 
@@ -228,10 +228,10 @@ app.listen(3000, function () {
     sync(db, 'get');
     var res = db.get('foo');
 
-    // synchronous
+    // syncho
     var res = db.get.sync(db, 'foo'); // Sync only need to be required once in your project / module to run the code in the fiber
 
-  Also note that `synchronous` does not decorate the fiber or any of the objects or functions that you sync and the
+  Also note that `syncho` does not decorate the fiber or any of the objects or functions that you sync and the
   only additions are the methods added to `Function.prototype`.
 
   (1) API for futures is not compatible with the `sync` module due to the creation of multiple properties on each future
@@ -242,7 +242,8 @@ app.listen(3000, function () {
 With ES6 generators and coroutines, Fibers may become obsolete but until there is a stable node version released
 supporting them, the only way to run asynchronous code synchronously is using fibers. Also the `yield` and `*` keywords
 are a bit intrusive and the `sync` API is still the more elegant IMO. It will be interesting to see benchmarks with
-the stable version of node for comparison. At the moment (0.11.9), fibers are faster than [co](https://github.com/visionmedia/co)
+the stable version of node for comparison. At the moment (0.11.9), 'syncho' with fibers is faster than
+[co](https://github.com/visionmedia/co) with ES6 generators.
 
     syncho-simple: 12647ms
     syncho-object: 12793ms
@@ -251,12 +252,10 @@ the stable version of node for comparison. At the moment (0.11.9), fibers are fa
 
 ## Benchmarks
 
-NB: all the existing Fibers modules are pretty fast and the cost of Fibers is marginal. The longer the IO takes,
-the more marginal it becomes to the point of being insignificant. I have to admit that I am a sucker for performance
-and I like to optimize to the extreme. That said I am using this module for an API that receives thousands of requests
-per second, and when you're bootstrapping a startup the cost of running servers does matter.
+NB: all the existing Fibers modules are in general pretty fast and the cost of fibers is marginal. The longer the IO takes,
+the more marginal it becomes to the point of being insignificant.
 
-TL;DR `synchronous` is the fastest (from 5% to 50 times faster than `sync`) of all fibers modules on every benchmark, and almost
+TL;DR `syncho` is the fastest (from 5% to 50 times faster than `sync`) of all fibers modules on every benchmark, and almost
 as fast as using asynchronous code except when running synchronous functions in parallel. It is even faster than using
 the `async` module (I haven't tested other asynchronous control-flow modules) and often faster than using raw fibers directly.
 
