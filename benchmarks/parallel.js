@@ -17,7 +17,7 @@
     }
   }
 
-  var Sync = require('../sync');
+  var Sync = require('../syncho');
   Sync(function () {
 
     function syncFastFn (file) {
@@ -25,14 +25,14 @@
     }
 
     var asyncSyncFastFn = syncFastFn.async();
-    console.time('sync-fast');
+    console.time('syncho');
     for (var i = 0, batch = []; i < n; i++) {
       batch.push(asyncSyncFastFn.future(null, 'package.json'));
     }
     for (var i = 0; i < n; i++) {
       batch[i].wait();
     }
-    console.timeEnd('sync-fast');
+    console.timeEnd('syncho');
 
     console.time('async.parallel');
     for (var i = 0, batch = []; i < n; i++) {

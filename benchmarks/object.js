@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var Sync = require('../sync')
+  var Sync = require('../syncho')
     , async = require('async')
     , sync = require('synchronize')
     , t = 0, n = 10000, count = 0
@@ -41,11 +41,11 @@
       console.timeEnd('synchronize');
 
       results = [];
-      console.time('sync-fast');
+      console.time('syncho');
       for (var i = 0; i < n; i++) {
         results.push(fs.stat.sync(fs, './package.json'));
       }
-      console.timeEnd('sync-fast');
+      console.timeEnd('syncho');
 
       results = [];
       require('sync');

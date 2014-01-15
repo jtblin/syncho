@@ -3,7 +3,7 @@
   var Sync = require('sync')
     , async = require('async')
     , sync = require('synchronize')
-    , t = 0, n = 10000
+    , t = 0, n = 100000
     ;
 
   Sync(function () {
@@ -29,17 +29,17 @@
     }
     console.timeEnd('sync-future');
 
-    Sync = require('../sync');
+    Sync = require('../syncho');
     asyncFn.future(null, 0).wait();
 
-    console.time('sync-fast-future');
+    console.time('syncho-future');
     for (var i = 0, batch = []; i < n; i++) {
       batch.push(asyncFn.future(null, i));
     }
     for (var i = 0; i < n; i++) {
       batch[i].wait();
     }
-    console.timeEnd('sync-fast-future');
+    console.timeEnd('syncho-future');
 
     console.time('async.parallel');
     for (var i = 0, batch = []; i < n; i++) {

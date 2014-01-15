@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var Sync = require('../sync')
+  var Sync = require('../syncho')
     , async = require('async')
     , sync = require('synchronize')
     , t = 0, n = 10000, i = 0, count = 0
@@ -36,17 +36,17 @@
       }
       console.timeEnd('synchronize');
 
-      console.time('sync-fast');
+      console.time('syncho');
       for (i = 0; i < n; i++) {
         results.push(asyncFn.sync(null, i));
       }
-      console.timeEnd('sync-fast');
+      console.timeEnd('syncho');
 
-      console.time('sync-fast-future');
+      console.time('syncho-future');
       for (i = 0; i < n; i++) {
         asyncFn.future(null, i).wait();
       }
-      console.timeEnd('sync-fast-future');
+      console.timeEnd('syncho-future');
 
       require('sync');
       console.time('sync');

@@ -7,32 +7,31 @@
     fs.stat('package.json', cb);
   }
 
-  var Sync = require('../sync');
+  var Sync = require('../syncho');
 
   Sync(function () {
     function syncFastFn () {
       return asyncFn.sync();
     }
 
-    console.time('sync-fast - make function async');
+    console.time('syncho - make function async');
     for (var i = 0; i < n; i++) {
       syncFastFn.async();
     }
-    console.timeEnd('sync-fast - make function async');
+    console.timeEnd('syncho - make function async');
 
     var asyncSyncFastFn = syncFastFn.async();
-    console.time('sync-fast - exec async functions');
-    console.time('sync-fast - exec async functions - total');
+    console.time('syncho - exec async functions');
+    console.time('syncho - exec async functions - total');
     for (var i = 0; i < n; i++) {
       asyncSyncFastFn(function (err, res) {
-//        console.log(err, res);
         if (++count === n) {
-          console.timeEnd('sync-fast - exec async functions - total');
+          console.timeEnd('syncho - exec async functions - total');
           setImmediate(next);
         }
       });
     }
-    console.timeEnd('sync-fast - exec async functions');
+    console.timeEnd('syncho - exec async functions');
 
   });
 

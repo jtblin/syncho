@@ -1,26 +1,32 @@
 {
-  "author": "Jerome Touffe-Blin <jtblin@gmail.com> (http://about.me/jtblin)",
-  "name": "sync-fast",
-  "description": "",
+  "name": "syncho",
   "version": "0.0.1",
+  "description": "Fast and lean abstraction for node Fibers. Easily run asynchronous functions synchronously.",
+  "author": "Jerome Touffe-Blin <jtblin@gmail.com> (http://about.me/jtblin)",
+  "homepage": "https://github.com/jtblin/syncho",
   "dependencies": {
     "fibers": "~1.0.1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jtblin/sync-fast.git"
+    "url": "git://github.com/jtblin/syncho.git"
   },
-  "main": "sync.js",
+  "main": "syncho.js",
   "engines": {
     "node": ">=0.5.2"
   },
   "keywords": [
     "fibers",
+    "syncho",
     "sync",
+    "synchronize",
+    "synchronous",
+    "async",
     "harmony",
     "flow",
+    "control flow",
     "thread",
-    "control"
+    "parallel"
   ],
   "license": "BSD",
   "devDependencies": {

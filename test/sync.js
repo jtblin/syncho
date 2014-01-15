@@ -1,6 +1,6 @@
 describe('Sync', function () {
 
-  var Sync = require('../sync');
+  var Sync = require('../syncho');
 
   function asyncFn (cb) {
     process.nextTick(function () {
