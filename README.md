@@ -203,7 +203,7 @@ app.listen(3000, function () {
 
   I really loved the simplicity of the `sync` module from @0ctave compared to the original `Future` abstraction
   and other `Fiber` modules but there are some performance issues especially with `Function.prototype.future` in
-  the `sync` module and code like statistics that I think unnecessary (500 loc for `sync` vs 100 loc for 'syncho').
+  the `sync` module and code like statistics that I think unnecessary (500 loc for `sync` vs 100 loc for `syncho`).
   As this isn't a fork of the `sync` module at all (code is written entirely from scratch) and is not 100% compatible
   with its API [1], it was better to create a brand new module.
 

@@ -64,15 +64,19 @@
   Function.prototype.async = function async (cxt) {
     var fn = this;
     return function (/* arguments */) {
-      var cb = arguments[arguments.length-1];
-      delete arguments[--arguments.length];
+      var args = arguments, cb = args[args.length-1];
       if (typeof cb !== 'function') throw new Error('Must pass a callback function to async functions');
-      try {
-        cb(null, fn.apply(cxt, arguments));
-      }
-      catch (err) {
-        cb(err);
-      }
+      delete args[--args.length];
+      process.nextTick(function () {
+        Sync(function () {
+          try {
+            cb(null, fn.apply(cxt, args));
+          }
+          catch (err) {
+            cb(err);
+          }
+        });
+      });
     }
   };
 
