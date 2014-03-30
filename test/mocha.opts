@@ -1,4 +1,4 @@
 --slow 20
 --growl
---reporter dot
+--reporter spec
 --require test/support/setup

@@ -29,7 +29,7 @@
     }
     console.timeEnd('sync-future');
 
-    Sync = require('../syncho');
+    Sync = require('../lib/syncho');
     asyncFn.future(null, 0).wait();
 
     console.time('syncho-future');

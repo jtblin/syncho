@@ -19,7 +19,7 @@
     }
   };
 
-  var Sync = require('../syncho');
+  var Sync = require('../lib/syncho');
   Sync(function () {
 
     console.time('syncho-simple');

@@ -33,7 +33,7 @@ Sync(function (){
 ### Function.prototype.sync(thisArg, args)
 
   Execute an asynchronous function inside a fiber, and return the result or throw in case of error.
-  Use the idiomatic `Function.prototype.call` where the first argument is the object you want
+  Use the idiomatic `Function.prototype.call` signature where the first argument is the object you want
   to bind the function to, the others are the standard arguments of the function.
 
 ```js

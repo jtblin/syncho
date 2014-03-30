@@ -7,7 +7,7 @@
     fs.stat('package.json', cb);
   }
 
-  var Sync = require('../syncho');
+  var Sync = require('../lib/syncho');
 
   Sync(function () {
     function syncFastFn () {

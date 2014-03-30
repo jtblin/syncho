@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  var Sync = require('../syncho')
+  var Sync = require('../lib/syncho')
     , async = require('async')
     , sync = require('synchronize')
     , t = 0, n = 10000, count = 0
