@@ -1,3 +1,5 @@
+[![NPM version](https://badge.fury.io/js/syncho.svg)](http://badge.fury.io/js/syncho)
+
 # syncho
 
 `syncho` is a thin and fast wrapper around [fibers](https://github.com/laverdet/node-fibers) for node.js.
