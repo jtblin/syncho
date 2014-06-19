@@ -1,6 +1,6 @@
 {
   "name": "syncho",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Fast and lean abstraction for node Fibers. Easily run asynchronous functions synchronously.",
   "author": "Jerome Touffe-Blin <jtblin@gmail.com> (http://about.me/jtblin)",
   "homepage": "https://github.com/jtblin/syncho",
