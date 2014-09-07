@@ -151,6 +151,22 @@ Sync(function (){
 });
 ```
 
+### Function.prototype.wrap()
+
+  Wrap the function in a Fiber. Useful for tests to avoid boilerplate code.
+
+In setup.js
+
+    var Sync = require('syncho');
+
+In your tests:
+
+```js
+  it('runs the test in a fiber', function () {
+    syncSubjectUnderTest().should.have.been.run.in.a.Fiber;
+  }.wrap());
+```
+
 ### Sync.Fiber(fn)
 
   Expose the original `Fiber` object in case you need it.
