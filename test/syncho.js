@@ -112,4 +112,13 @@ describe('Sync', function () {
     });
   });
 
+  it('should wrap the function in a Fiber', function () {
+    var fn = function () {
+      var start = new Date;
+      Sync.sleep(100);
+      expect(new Date - start).to.be.closeTo(100, 5);
+    }.wrap();
+    fn();
+  });
+
 });
