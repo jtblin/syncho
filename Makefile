@@ -1,6 +1,9 @@
 test:
 	mocha --reporter list test/
 
+cov:
+	istanbul cover _mocha
+
 patch:
 	npm version patch
 

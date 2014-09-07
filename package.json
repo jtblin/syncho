@@ -30,12 +30,15 @@
   ],
   "license": "BSD",
   "devDependencies": {
-    "mocha": "~1.17.0",
     "chai": "~1.8.1",
+    "istanbul": "^0.3.2",
+    "mocha": "~1.17.0",
     "sinon": "^1.9.0",
     "sinon-chai": "^2.5.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha -w test/"
+    "test": "NODE_ENV=test mocha -w test/",
+    "cov": "istanbul cover _mocha",
+    "viewcov": "open test/coverage/lcov-report/index.html"
   }
 }

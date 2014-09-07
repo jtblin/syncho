@@ -3,3 +3,5 @@ tmp/
 .DS_Store
 .DS_Store?
 node_modules/
+test/coverage/
+*.log
