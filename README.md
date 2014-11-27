@@ -153,7 +153,16 @@ Sync(function (){
 
 ### Function.prototype.wrap()
 
-  Wrap the function in a Fiber. Useful for tests to avoid boilerplate code.
+  Wrap the function in a Fiber. Useful for events emitters and other functions that expect a function as an argument.
+
+
+```js
+   syncSubjectUnderTest().should.have.been.run.in.a.Fiber;
+```
+
+### Function.prototype.wrapIt()
+
+  Wrap a function in a Fiber passing `done` callback for [mocha](https://github.com/mochajs/mocha) tests.
 
 In setup.js
 
@@ -162,9 +171,10 @@ In setup.js
 In your tests:
 
 ```js
-  it('runs the test in a fiber', function () {
+  it('runs the test in a fiber', function (done) {
     syncSubjectUnderTest().should.have.been.run.in.a.Fiber;
-  }.wrap());
+    done();
+  }.wrapIt());
 ```
 
 ### Sync.Fiber(fn)
