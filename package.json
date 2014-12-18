@@ -5,7 +5,7 @@
   "author": "Jerome Touffe-Blin <jtblin@gmail.com> (http://about.me/jtblin)",
   "homepage": "https://github.com/jtblin/syncho",
   "dependencies": {
-    "fibers": "~1.0.1"
+    "fibers": "1.0.2"
   },
   "repository": {
     "type": "git",
