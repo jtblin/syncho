@@ -5,7 +5,7 @@
   "author": "Jerome Touffe-Blin <jtblin@gmail.com> (http://about.me/jtblin)",
   "homepage": "https://github.com/jtblin/syncho",
   "dependencies": {
-    "fibers": "1.0.2"
+    "fibers": "~1.0.5"
   },
   "repository": {
     "type": "git",
@@ -30,11 +30,11 @@
   ],
   "license": "BSD",
   "devDependencies": {
-    "chai": "~1.8.1",
+    "chai": "~1.10.0",
     "istanbul": "^0.3.2",
-    "mocha": "~1.17.0",
-    "sinon": "^1.9.0",
-    "sinon-chai": "^2.5.0"
+    "mocha": "~2.1.0",
+    "sinon": "^1.12.0",
+    "sinon-chai": "^2.6.0"
   },
   "scripts": {
     "test": "NODE_ENV=test mocha -w test/",
